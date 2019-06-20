@@ -1,7 +1,1 @@
-## 追加機能
-### 2019.06.14
-	*四つの矩形とのあたり判定
-### 2019.06.18
-	* グー、チョキ、パー ジャスチャー
-	* 指で挟むジャスチャー
-	* 手の位置を取って図を描く
+## 追加### 2019.06.14	*四つの矩形とのあたり判定### 2019.06.18	* グー、チョキ、パー ジャスチャー	* 指で挟むジャスチャー	* 手の位置を取って図を描く 	[Drawingへ移動](https://github.com/SkyoKen/LeapOrchestra/tree/master/handDrawing)### 2019.06.20	* バイナリファイルからデータの書き込みと読み込み	[binaryへ移動](https://github.com/SkyoKen/LeapOrchestra/tree/master/binary)
