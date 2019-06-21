@@ -1,8 +1,13 @@
 # LeapOtchestra
-1. [環境構築](#環境構築)
+
+## 目次
+1. [環境構築](#環境構築)  
+[Leap Motion](#leapmotion)  
+[Unity](#unity)  
+[Processing](#processing)
 2. [追加](#追加)
 ## 環境構築
-### Leap Motoin
+### LeapMotion
 * [Leap_Motion_Developer_Kitのダウンロード（Leap_Motion_Setup.exe）](https://developer.leapmotion.com/get-started)
 * [Leap Motion SDKのダウンロード（Leap_Motion_Developer_Kit.zip）](https://developer.leapmotion.com/get-started)
 ### ~~Unity~~
@@ -35,5 +40,4 @@
 2. Leap Motionを用いたジェスチャ操作によるピアノを弾くプログラムの作成  
 [LeapPianoの確認プログラムへ](https://github.com/SkyoKen/LeapPiano/tree/master/exe)
 
-
-[TOP](#LeapOrchestra)
+[↑TOP](#LeapOrchestra)
