@@ -2,13 +2,13 @@
 :shipit:
 ## 目次
 1. [環境構築](#環境構築)  
-[Leap Motion](#leapmotion)  
-[~~Unity~~](#unity)  
-[Processing](#processing)
+    1. [Leap Motion](#leapmotion)  
+    2. [~~Unity~~](#unity)  
+    3. [Processing](#processing)
 2. [更新履歴](#更新履歴)  
-[2019.06.14](#20190614)  
-[2019.06.18](#20190618)  
-[2019.06.21](#20190621)  
+    1. [2019.06.14](#20190614)  
+    2. [2019.06.18](#20190618)  
+    3. [2019.06.21](#20190621)  
 ## 環境構築
 ### LeapMotion
 * [Leap_Motion_Developer_Kitのダウンロード（Leap_Motion_Setup.exe）](https://developer.leapmotion.com/get-started)
