@@ -43,7 +43,7 @@ void setup() {
   cp5 = new ControlP5(this);
   udp = new UDP( this, 2333);
   ControlFont cf = new ControlFont(createFont("メイリオ", 20));
-  cp5.addButton("UDP_Msg")
+   cp5.addButton("UDP_Msg")
     .setFont(cf)
     .setLabel("送信")
     .setPosition(50, 50)
@@ -153,7 +153,7 @@ void draw() {
     // Drawing
     drawRect();
     
-    hand.draw();
+   // hand.draw();
     
      if(handPosition.x>width/2-width/8&&handPosition.x<width/2+width/8&&handPosition.y<height/2-height/3+width/8&&handPosition.y>height/2-height/3-width/8){
        a=color(0, 255, 0);
@@ -235,9 +235,9 @@ void draw() {
       // Drawing
 
       // Drawing:
-      //finger.draw();  // Executes drawBones() and drawJoints()
-      //finger.drawBones();
-      // finger.drawJoints();
+      finger.draw();  // Executes drawBones() and drawJoints()
+      finger.drawBones();
+       finger.drawJoints();
 
       // ------------------------------------------------
       // Selection
