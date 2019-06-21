@@ -1,8 +1,21 @@
 //import processing.sound.*;
 
 //SinOsc sine1, sine2;
-
+//Leap motion
 import de.voidplus.leapmotion.*;
+
+//UDP---
+import hypermedia.net.*;
+import controlP5.*;
+
+UDP udp;
+ControlP5 cp5;
+
+final String IP = "255.255.255.255";
+final int PORT =53131;
+String msg = "test_messege";   //UDPで送るコマンド
+//----
+
 color a=color(255, 0, 0);
 color b=color(255, 0, 0);
 color c=color(255, 0, 0);
@@ -24,8 +37,8 @@ PVector pos=new PVector(0, 0, 0);
 LeapMotion leap;
 
 void setup() {
-  fullScreen();
-  //size(800, 500);
+ //fullScreen();
+  size(800, 500);
   background(255);
   // ...
   /*
@@ -35,8 +48,25 @@ void setup() {
    sine2.freq(600);
    */
   leap = new LeapMotion(this);
+  
+  //UDP
+  cp5 = new ControlP5(this);
+  udp = new UDP( this ,2333);
+
+  ControlFont cf = new ControlFont(createFont("メイリオ",20));
+
+  cp5.addButton("UDP_Msg")
+    .setFont(cf)
+    .setLabel("送信")
+    .setPosition(50,50)
+    .setSize(100,100);
 }
 
+
+void UDP_Msg(){
+  udp.send(msg,IP,PORT);
+  
+}
 
 // ======================================================
 // 1. Callbacks
@@ -144,7 +174,7 @@ void draw() {
     // --------------------------------------------------
     // Drawing
     drawRect();
-    println(handTime%1);
+   // println(handTime%1);
     if (handTime==0) {
       PVector prePos=new PVector(pos.x, pos.y, pos.z);
       PVector pos=new PVector(handPosition.x, handPosition.y, handPosition.z);
@@ -178,7 +208,7 @@ void draw() {
     //   if(handPinch==1){println(1111);}
 
 
-    println(handPosition);
+   // println(handPosition);
     // ==================================================
     // 3. Arm
 
@@ -194,24 +224,33 @@ void draw() {
     // ==================================================
     // 4. Finger
     Finger  fingerThumb        = hand.getThumb();
+    Finger  fingerIndex        = hand.getIndexFinger();
+      Finger  fingerMiddle       = hand.getMiddleFinger();
+      Finger  fingerRing         = hand.getRingFinger();
+      Finger  fingerPink         = hand.getPinkyFinger();
+      if(!fingerThumb.isExtended()&&!fingerIndex.isExtended()&&!fingerMiddle.isExtended()&&!fingerRing.isExtended()&&!fingerPink.isExtended()&&handIsRight){
+        msg="1";
+       // UDP_Msg();
+      }else{
+      msg="0";
+      }
     // or                        hand.getFinger("thumb");
     // or                        hand.getFinger(0);
     /* if (!fingerThumb.isExtended()) {
      println("Thumb");
      }
-     Finger  fingerIndex        = hand.getIndexFinger();
      if (!fingerIndex.isExtended()) {
      println("Index");
      }
-     Finger  fingerMiddle       = hand.getMiddleFinger();
+    
      if (!fingerMiddle.isExtended()) {
      println("Middle");
      }
-     Finger  fingerRing         = hand.getRingFinger();
+     
      if (!fingerRing.isExtended()) {
      println("Ring");
      }
-     Finger  fingerPink         = hand.getPinkyFinger();
+     
      if (!fingerPink.isExtended()) {
      println("Pink");
      }
