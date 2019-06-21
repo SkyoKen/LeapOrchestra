@@ -1,11 +1,14 @@
 # LeapOtchestra
-
+:shipit:
 ## 目次
 1. [環境構築](#環境構築)  
 [Leap Motion](#leapmotion)  
-[Unity](#unity)  
+[~~Unity~~](#unity)  
 [Processing](#processing)
-2. [追加](#追加)
+2. [更新履歴](#更新履歴)  
+[2019.06.14](#20190614)  
+[2019.06.18](#20190618)  
+[2019.06.21](#20190621)  
 ## 環境構築
 ### LeapMotion
 * [Leap_Motion_Developer_Kitのダウンロード（Leap_Motion_Setup.exe）](https://developer.leapmotion.com/get-started)
@@ -19,7 +22,7 @@
 * [Leap Javaライブラリのインポート](https://developer-archive.leapmotion.com/documentation/java/devguide/Leap_Processing.html)
 * [UDPライブラリのインポート](https://memorandums.hatenablog.com/entry/2016/11/08/203610)(2019.06.21追加)
 
-## 追加
+## 更新履歴
 ### 2019.06.14
 1. 四つの矩形の設置、およびあたり判定  
 ![20190614](./image/20190614.png)
@@ -40,4 +43,4 @@
 2. Leap Motionを用いたジェスチャ操作によるピアノを弾くプログラムの作成  
 [LeapPianoの確認プログラムへ](https://github.com/SkyoKen/LeapPiano/tree/master/exe)
 
-[↑TOP](#LeapOrchestra)
+[↑TOP](#目次)
