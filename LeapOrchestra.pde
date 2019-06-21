@@ -1,27 +1,22 @@
-//import processing.sound.*;
-
-//SinOsc sine1, sine2;
-//Leap motion
+//LeapMotoin
 import de.voidplus.leapmotion.*;
+LeapMotion leap;
 
-//UDP---
+//UDP
 import hypermedia.net.*;
 import controlP5.*;
-
 UDP udp;
 ControlP5 cp5;
-
 final String IP = "255.255.255.255";
 final int PORT =53131;
 String msg = "test_messege";   //UDPで送るコマンド
-//----
 
+//RECT
 color a=color(255, 0, 0);
 color b=color(255, 0, 0);
 color c=color(255, 0, 0);
 color d=color(255, 0, 0);
-PVector prePos=new PVector(0, 0, 0);
-PVector pos=new PVector(0, 0, 0);
+
 // ======================================================
 // Table of Contents:
 // ├─ 1. Callbacks
@@ -34,38 +29,30 @@ PVector pos=new PVector(0, 0, 0);
 // ======================================================
 
 
-LeapMotion leap;
+
 
 void setup() {
- //fullScreen();
+
   size(800, 500);
   background(255);
-  // ...
-  /*
-  sine1 = new SinOsc(this);
-   sine1.freq(500);
-   sine2 = new SinOsc(this);
-   sine2.freq(600);
-   */
-  leap = new LeapMotion(this);
   
+  //Leap
+  leap = new LeapMotion(this);
+
   //UDP
   cp5 = new ControlP5(this);
-  udp = new UDP( this ,2333);
-
-  ControlFont cf = new ControlFont(createFont("メイリオ",20));
-
+  udp = new UDP( this, 2333);
+  ControlFont cf = new ControlFont(createFont("メイリオ", 20));
   cp5.addButton("UDP_Msg")
     .setFont(cf)
     .setLabel("送信")
-    .setPosition(50,50)
-    .setSize(100,100);
+    .setPosition(50, 50)
+    .setSize(100, 100);
 }
 
 
-void UDP_Msg(){
-  udp.send(msg,IP,PORT);
-  
+void UDP_Msg() {
+  udp.send(msg, IP, PORT);
 }
 
 // ======================================================
@@ -76,9 +63,6 @@ void leapOnInit() {
 }
 void leapOnConnect() {
   println("Leap Motion Connect");
-}
-void leapOnFrame() {
-  // println("Leap Motion Frame");
 }
 void leapOnDisconnect() {
   println("Leap Motion Disconnect");
@@ -93,7 +77,7 @@ void drawRect() {
   strokeWeight(10);
   strokeJoin(BEVEL);
 
-  textSize(128);
+  textSize(32);
   textAlign(CENTER, CENTER);
   strokeWeight(10);
   pushMatrix();
@@ -135,12 +119,6 @@ void drawRect() {
   text("4", 0, 0);
   popMatrix();
 
- 
-  //  text("1", width/2, height/2-height/3);
-//
- // text("2", width/2-width/3, height/2+height/4);
- // text("3", width/2, height/2+height/4);
-  //text("4", width/2+width/3, height/2+height/4);
 }
 void draw() {
 
@@ -174,41 +152,39 @@ void draw() {
     // --------------------------------------------------
     // Drawing
     drawRect();
-   // println(handTime%1);
-    if (handTime==0) {
-      PVector prePos=new PVector(pos.x, pos.y, pos.z);
-      PVector pos=new PVector(handPosition.x, handPosition.y, handPosition.z);
-    }
-    textSize(32);
+    
     hand.draw();
-    /* a=(handPosition.y<height/2&&handPosition.y>0&&handPinch==1)?color(0,255,0):color(255,0,0);
-     b=(handPosition.x>0&&handPosition.x<width/2&&handPosition.y<height&&handPinch==1)?color(0,255,0):color(255,0,0);
-     c=(handPosition.x>width/2&&handPosition.x<width&&handPosition.y<height&&handPinch==1)?color(0,255,0):color(255,0,0);
-     */
-    /*
-      rect(-width/3, height/4, width/6, width/6);
-     popMatrix();
-     pushMatrix();
-     stroke(c);
-     translate(width/2, height/2);
-     rect(0, height/4, width/6, width/6);
-     popMatrix();
-     
-     pushMatrix();
-     stroke(d);
-     translate(width/2, height/2);
-     rect(width/3, height/4, width/6, width/6);
-     */
+    
+     if(handPosition.x>width/2-width/8&&handPosition.x<width/2+width/8&&handPosition.y<height/2-height/3+width/8&&handPosition.y>height/2-height/3-width/8){
+       a=color(0, 255, 0);
+       msg="1";
+     }else{
+       a=color(255, 0, 0);
+     }
+      if(handPosition.x>width/2-width/3-width/8&&handPosition.x<width/2-width/3+width/8&&handPosition.y<height/2+height/4+width/8&&handPosition.y>height/2+height/4-width/8){
+       b=color(0, 255, 0);
+       msg="2";
+     }else{
+       b=color(255, 0, 0);
+     }
+      if(handPosition.x>width/2-width/8&&handPosition.x<width/2+width/8&&handPosition.y<height/2+height/4+width/8&&handPosition.y>height/2+height/4-width/8){
+       c=color(0, 255, 0);
+       msg="3";
+     }else{
+       c=color(255, 0, 0);
+     }
+      if(handPosition.x>width/2+width/3-width/8&&handPosition.x<width/2*width/3+width/8&&handPosition.y<height/2+height/4+width/8&&handPosition.y>height/2+height/4-width/8){
+       d=color(0, 255, 0);
+       msg="4";
+     }else{
+       d=color(255, 0, 0);
+     }
+  /*   
     a=(handPosition.x>width/2-width/8&&handPosition.x<width/2+width/8&&handPosition.y<height/2-height/3+width/8&&handPosition.y>height/2-height/3-width/8)?color(0, 255, 0):color(255, 0, 0);
     b=(handPosition.x>width/2-width/3-width/8&&handPosition.x<width/2-width/3+width/8&&handPosition.y<height/2+height/4+width/8&&handPosition.y>height/2+height/4-width/8)?color(0, 255, 0):color(255, 0, 0);
     c=(handPosition.x>width/2-width/8&&handPosition.x<width/2+width/8&&handPosition.y<height/2+height/4+width/8&&handPosition.y>height/2+height/4-width/8)?color(0, 255, 0):color(255, 0, 0);
     d=(handPosition.x>width/2+width/3-width/8&&handPosition.x<width/2*width/3+width/8&&handPosition.y<height/2+height/4+width/8&&handPosition.y>height/2+height/4-width/8)?color(0, 255, 0):color(255, 0, 0);
-
-    //      println(handPinch);
-    //   if(handPinch==1){println(1111);}
-
-
-   // println(handPosition);
+//*/
     // ==================================================
     // 3. Arm
 
@@ -225,36 +201,26 @@ void draw() {
     // 4. Finger
     Finger  fingerThumb        = hand.getThumb();
     Finger  fingerIndex        = hand.getIndexFinger();
-      Finger  fingerMiddle       = hand.getMiddleFinger();
-      Finger  fingerRing         = hand.getRingFinger();
-      Finger  fingerPink         = hand.getPinkyFinger();
-      if(!fingerThumb.isExtended()&&!fingerIndex.isExtended()&&!fingerMiddle.isExtended()&&!fingerRing.isExtended()&&!fingerPink.isExtended()&&handIsRight){
-        msg="1";
-       // UDP_Msg();
-      }else{
-      msg="0";
-      }
-    // or                        hand.getFinger("thumb");
-    // or                        hand.getFinger(0);
-    /* if (!fingerThumb.isExtended()) {
-     println("Thumb");
-     }
-     if (!fingerIndex.isExtended()) {
-     println("Index");
-     }
-    
-     if (!fingerMiddle.isExtended()) {
-     println("Middle");
-     }
-     
-     if (!fingerRing.isExtended()) {
-     println("Ring");
-     }
-     
-     if (!fingerPink.isExtended()) {
-     println("Pink");
-     }
-     */    for (Finger finger : hand.getFingers()) {
+    Finger  fingerMiddle       = hand.getMiddleFinger();
+    Finger  fingerRing         = hand.getRingFinger();
+    Finger  fingerPink         = hand.getPinkyFinger();
+    //指で抓む
+     if(handPinch==1){
+       msg="指で抓む";
+    }
+    //グー
+    if (!fingerThumb.isExtended()&&!fingerIndex.isExtended()&&!fingerMiddle.isExtended()&&!fingerRing.isExtended()&&!fingerPink.isExtended()) {
+      msg="グー";
+    }
+    //チョキ
+     if (!fingerThumb.isExtended()&&fingerIndex.isExtended()&&fingerMiddle.isExtended()&&!fingerRing.isExtended()&&!fingerPink.isExtended()) {
+      msg="チョキ";
+    }
+    //パー
+    if (fingerThumb.isExtended()&&fingerIndex.isExtended()&&fingerMiddle.isExtended()&&fingerRing.isExtended()&&fingerPink.isExtended()) {
+      msg="パー";
+    }
+         for (Finger finger : hand.getFingers()) {
       // or              hand.getOutstretchedFingers();
       // or              hand.getOutstretchedFingersByAngle();
 
