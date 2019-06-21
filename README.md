@@ -1,5 +1,5 @@
 # LeapOtchestra
-:shipit:
+:shipit:Leap Motionを用いたジェスチャ操作による、拍数情報をraspberry piに送る。
 ## 目次
 1. [環境構築](#環境構築)  
     1. [Leap Motion](#leapmotion)  
