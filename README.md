@@ -1,7 +1,31 @@
 # LeapOtchestra
-## 追加
+:shipit:
+## 目次
+1. [環境構築](#環境構築)  
+    1. [Leap Motion](#leapmotion)  
+    2. [~~Unity~~](#unity)  
+    3. [Processing](#processing)
+2. [更新履歴](#更新履歴)  
+    1. [2019.06.14](#20190614)  
+    2. [2019.06.18](#20190618)  
+    3. [2019.06.21](#20190621)  
+## 環境構築
+### LeapMotion
+* [Leap_Motion_Developer_Kitのダウンロード（Leap_Motion_Setup.exe）](https://developer.leapmotion.com/get-started)
+* [Leap Motion SDKのダウンロード（Leap_Motion_Developer_Kit.zip）](https://developer.leapmotion.com/get-started)
+### ~~Unity~~
+* [~~Unityのダウンロード~~](https://store.unity.com/ja?_ga=2.109239045.1635307830.1561082608-1793881246.1537953195&currency=JPY)
+* [~~Unity Assets for Leap Motion Orion Betaのダウンロード（Leap_Motion_Core_Assets.unitypackage）~~](https://developer.leapmotion.com/unity#5436356)
+### Processing
+* [Processingのダウンロード](https://processing.org/download/)
+* Leap Motion for Processingライブラリのインポート
+* [Leap Javaライブラリのインポート](https://developer-archive.leapmotion.com/documentation/java/devguide/Leap_Processing.html)
+* [UDPライブラリのインポート](https://memorandums.hatenablog.com/entry/2016/11/08/203610)(2019.06.21追加)
+
+## 更新履歴
 ### 2019.06.14
-1. 四つの矩形の設置、およびあたり判定
+1. 四つの矩形の設置、およびあたり判定  
+![20190614](./image/20190614.png)
 ### 2019.06.18
 1. グー、チョキ、パー　ジャスチャーの検出
 2. 指で抓む　ジャスチャーの検出
@@ -14,6 +38,9 @@
 ~~1. バイナリファイルからデータの書き込みと読み込み~~
 ### 2019.06.21
 1. UDP通信機能の追加  
-[UDP通信の確認プログラムへ](https://github.com/SkyoKen/Net_Terminal//tree/master/UDP)
+[UDP通信の確認プログラムへ](https://github.com/SkyoKen/Net_Terminal//tree/master/UDP)  
+![20190621](./image/20190621.png)
 2. Leap Motionを用いたジェスチャ操作によるピアノを弾くプログラムの作成  
 [LeapPianoの確認プログラムへ](https://github.com/SkyoKen/LeapPiano/tree/master/exe)
+
+[↑TOP](#目次)
