@@ -2,7 +2,7 @@
 ## 追加
 ### 2019.06.14
 1. 四つの矩形の設置、およびあたり判定  
-![20190614](https://github.com/SkyoKen/LeapOrchestra/tree/master/image/20190614.png)
+![20190614](https://github.com/SkyoKen/LeapOrchestra/blob/master/image/20190614.png)
 ### 2019.06.18
 1. グー、チョキ、パー　ジャスチャーの検出
 2. 指で抓む　ジャスチャーの検出
@@ -16,6 +16,6 @@
 ### 2019.06.21
 1. UDP通信機能の追加  
 [UDP通信の確認プログラムへ](https://github.com/SkyoKen/Net_Terminal//tree/master/UDP)  
-![20190621](https://github.com/SkyoKen/LeapOrchestra/tree/master/image/20190621.png)
+![20190621](https://github.com/SkyoKen/LeapOrchestra/blob/master/image/20190621.png)
 2. Leap Motionを用いたジェスチャ操作によるピアノを弾くプログラムの作成  
 [LeapPianoの確認プログラムへ](https://github.com/SkyoKen/LeapPiano/tree/master/exe)
