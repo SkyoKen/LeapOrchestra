@@ -9,6 +9,7 @@
     1. [2019.06.14](#20190614)  
     2. [2019.06.18](#20190618)  
     3. [2019.06.21](#20190621)  
+    4. [2019.06.25](#20190625)
 ## 環境構築
 ### LeapMotion
 * [Leap_Motion_Developer_Kitのダウンロード（Leap_Motion_Setup.exe）](https://developer.leapmotion.com/get-started)
@@ -42,5 +43,8 @@
 ![20190621](./image/20190621.png)
 2. Leap Motionを用いたジェスチャ操作によるピアノを弾くプログラムの作成  
 [LeapPianoの確認プログラムへ](https://github.com/SkyoKen/LeapPiano/tree/master/exe)
+### 2019.06.25
+1. データを送る時間を一秒ごとに変更
+2. 手の移動量の検出
 
 [↑TOP](#目次)
