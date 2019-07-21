@@ -5,6 +5,7 @@
     1. [Leap Motion](#leapmotion)  
     2. [~~Unity~~](#unity)  
     3. [Processing](#processing)
+    4. [SonicPi](#SonicPi)
 2. [更新履歴](#更新履歴)  
     1. [2019.06.14](#20190614)  
     2. [2019.06.18](#20190618)  
@@ -23,7 +24,8 @@
 * Leap Motion for Processingライブラリのインポート
 * [Leap Javaライブラリのインポート](https://developer-archive.leapmotion.com/documentation/java/devguide/Leap_Processing.html)
 * [UDPライブラリのインポート](https://memorandums.hatenablog.com/entry/2016/11/08/203610)(2019.06.21追加)
-
+### SonicPi
+* [SonicPiのダウンロード](https://sonic-pi.net/)
 ## 更新履歴
 ### 2019.06.14
 1. 四つの矩形の設置、およびあたり判定  
@@ -51,7 +53,9 @@
 1. Sonic Piを利用した音楽の出力(musicPlay.rb)
 2. PCからRaspberry PiのSonic Piをコントロール
 3. ボタンなどアイテムの追加
-![20190614](./image/20190614.png)
+![2019072101](./image/2019072101.png)
+4. 機能実装されてないジャスチャーの認識の分離
+![2019072102](./image/2019072102.png)
 [Processing2SoicPi(leapMotion抜き)確認プログラムへ](https://github.com/SkyoKen/Processing2SonicPi)  
 [Processing2SoicPi(leapMotion付き)確認プログラムへ](https://github.com/SkyoKen/Processing2SonicPi/tree/leapmotoin)  
 
