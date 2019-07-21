@@ -10,6 +10,7 @@
     2. [2019.06.18](#20190618)  
     3. [2019.06.21](#20190621)  
     4. [2019.06.25](#20190625)
+    5. [2019.07.19](#20190719)
 ## 環境構築
 ### LeapMotion
 * [Leap_Motion_Developer_Kitのダウンロード（Leap_Motion_Setup.exe）](https://developer.leapmotion.com/get-started)
@@ -46,5 +47,12 @@
 ### 2019.06.25
 1. データを送る時間を一秒ごとに変更
 2. 手の移動量の検出
+### 2019.07.19
+1. Sonic Piを利用した音楽の出力(musicPlay.rb)
+2. PCからRaspberry PiのSonic Piをコントロール
+3. ボタンなどアイテムの追加
+![20190614](./image/20190614.png)
+[Processing2SoicPi(leapMotion抜き)確認プログラムへ](https://github.com/SkyoKen/Processing2SonicPi)  
+[Processing2SoicPi(leapMotion付き)確認プログラムへ](https://github.com/SkyoKen/Processing2SonicPi/tree/leapmotoin)  
 
 [↑TOP](#目次)
