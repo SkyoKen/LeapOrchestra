@@ -21,4 +21,7 @@ public class OSC {
     this.oscP5.send(msg, sonicPi);
     writeMsg("/osc/"+s+" "+i);
   }
+  public String getAddressPort(){
+    return String.format("IP: %-16s PORT: %s",sonicPi.address(),sonicPi.port());
+  }
 }

@@ -29,10 +29,17 @@ public class GUI {
       ;
     this.console=this.cp5.addConsole(messageBox);
 
-    String[] cp5MSG={"MUSICNUM", "VOLUME", "OCTAVE", "TIME"};
+this.cp5.addTextarea("IPPORT")
+      .setPosition(50,height-24*1.5)
+      .setSize(width,24)
+      .setFont(fontMsg)
+      .setLineHeight(20)
+      .setText(osc.getAddressPort())
+      ;
+    String[] cp5MSG={"MUSICNUM", "VOLUME", "SCALE", "TIME"};
     int btnSize=100;
 
-    //MUSICNUM,VOLUME,OCTAVE,TIME Buton
+    //MUSICNUM,VOLUME,SCALE,TIME Buton
     for (int y=0; y<cp5MSG.length; y++) {
       PVector pos=new PVector(100+btnSize*3*(y%2), 100+btnSize*(y/2));
       this.cp5.addTextlabel(cp5MSG[y])
@@ -129,7 +136,7 @@ public class GUI {
   public void show() {
     this.cp5.getController("PLAY").show();
     this.cp5.getController("RESET").show();
-    String[] msg={"MUSICNUM", "VOLUME", "OCTAVE", "TIME"};
+    String[] msg={"MUSICNUM", "VOLUME", "SCALE", "TIME"};
 
     for (int y=0; y<msg.length; y++) {
       this.cp5.getController(msg[y]).show();
@@ -142,7 +149,7 @@ public class GUI {
   public void hide() {
     this.cp5.getController("PLAY").hide();
     this.cp5.getController("RESET").hide();
-    String[] msg={"MUSICNUM", "VOLUME", "OCTAVE", "TIME"};
+    String[] msg={"MUSICNUM", "VOLUME", "SCALE", "TIME"};
 
     for (int y=0; y<msg.length; y++) {
       this.cp5.getController(msg[y]).hide();
@@ -168,7 +175,7 @@ public void RESET() {
 }
 
 public void controlEvent(ControlEvent theEvent) {
-  String[] cp5MSG={"MUSICNUM", "VOLUME", "OCTAVE", "TIME"};
+  String[] cp5MSG={"MUSICNUM", "VOLUME", "SCALE", "TIME"};
   if (theEvent.isAssignableFrom(Bang.class)) {
     for (int i=0; i<cp5MSG.length; i++) {
       String m=theEvent.getName();
