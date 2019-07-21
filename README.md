@@ -46,12 +46,5 @@
 ### 2019.06.25
 1. データを送る時間を一秒ごとに変更
 2. 手の移動量の検出
-### 2019.06.28
-1. OSC通信でSonic piと繋ぐの検証
-### 2019.07.12
-1. Processingでsonic piをコントロール（OSC通信）機能の追加  
-[Processing2SonicPiへ](https://github.com/SkyoKen/Processing2SonicPi)
-![Processing2SonicPi.png](https://github.com/SkyoKen/Leap_SonicPi/blob/master/info.png)
-
 
 [↑TOP](#目次)
