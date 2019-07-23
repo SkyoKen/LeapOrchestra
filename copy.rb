@@ -14,7 +14,7 @@ flag="RESET"
 t = 0
 musicNum=0
 vol=1
-scale0=3
+octave=3
 time=0.5
 
 
@@ -26,7 +26,7 @@ define :ini do |n|
   print "initialize start"
   t = 0
   vol=1
-  scale0=3
+  octave=3
   time=0.5
   
   case n
@@ -46,7 +46,7 @@ define :ini do |n|
     rise =[ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,-1,0].ring
     mlength =[ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 0.75,0.25,0.75,0.25,1,1, 0.75,0.25,0.75,0.25,1,1,1, 1 ,2, 1, 1 ,2].ring
   end
-  
+
   print "initialize finished"
 end
 
@@ -82,14 +82,12 @@ live_loop :setTime do
   print "set time",time
 end
 
-#set scale [0,6]
-live_loop :setScale do
+#set octave [0,6]
+live_loop :setOctave do
   use_real_time
-  msg = sync "/osc/SCALE"
-  scale0=[[scale0+msg[0],0].max,6].min
-  
-  # octave=[[octave+msg[0],0].max,6].min
-  print "scale=",scale0
+  msg = sync "/osc/OCTAVE"
+  octave=[[octave+msg[0],0].max,6].min
+  print "octave=",octave
 end
 
 
@@ -100,7 +98,7 @@ define :musicplay do
   playing t,vol
 end
 define :playing do |n,v|
-  o=[[scale0+rise[n],0].max,6].min
+  o=[[octave+rise[n],0].max,6].min
   play notes[o][tune[n]],release: mlength[n]*time,amp: vol
   sleep mlength[n]*time
 end
