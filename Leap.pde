@@ -76,44 +76,51 @@ void check() {
       this.t=0;
 
       String finger="";
+      String s="";
+      int n=0;
       for (Finger f : hand.getFingers())finger+=f.isExtended()?1:0;
       switch(finger) {
       case "00000":
         msg="0\nrock";
-        osc.sendMessage("MUSICNUM", -1);
+        s="MUSICNUM";n=-1;
+       
         break;
       case "01000":
-       osc.sendMessage("MUSICNUM", 1);
+        s="MUSICNUM";n=1;
         msg="1";
         break;
 
       case "01100":
-      osc.sendMessage("VOLUME", -1);
+     s="VOLUME";n=-1;
         msg="2\nscissors";
         break;
 
       case "00111":
-      osc.sendMessage("VOLUME", 1);
+      s="VOLUME";n=1;
         msg="3";
         break;
 
       case "01111":
-      osc.sendMessage("SCALE", -1);
+       s="SCALE";n=-1;
+     
         msg="4";
         break;
 
       case "11111":
-       osc.sendMessage("SCALE", 1);
+        s="SCALE";n=1;
+     
         msg="5\npaper";
         break;
 
       case "10001":
-       osc.sendMessage("TIME", -0.25);
+         s="TIME";n=-1;
+     
+     
         msg="6";
         break;
 
       case "11000":
-       osc.sendMessage("TIME", 0.25);
+       s="TIME";n=1;
         msg="7";
         break;
 
@@ -121,7 +128,8 @@ void check() {
         msg="?";
         return;
       }
-      writeMsg(msg);
+      //writeMsg(msg);
+      osc.sendMessage(s, n);
     }
   }
 }
