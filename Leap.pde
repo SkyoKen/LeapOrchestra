@@ -37,7 +37,7 @@ public class LEAP {
       //  println("right", hand_position.x - old_position.x);
 
 
-      //*
+      /*
       if (!test) { 
         //abc=true;
         test=true;
@@ -47,23 +47,14 @@ public class LEAP {
           // println("up", (hand_position.y - old_position.y));
         } else if (hand_position.x - old_position.x>20) {
           println("right", hand_position.x - old_position.x);
-          //int cnt=0;
-          //for(;;){
-          //cnt++;
-          //if(cnt/60==1)break;
-        } /*else if (hand_position.x - old_position.x<-20) {
-        //println("left", hand_position.x - old_position.x);
-        test=false;
-      }*/
-        //abc=false;
-        // abc=true;
-         
+         }}
+          
       }
     
   
     old_position = hand_position;
-   
-  }//*/
+   //*/
+  }
 }
 
 
