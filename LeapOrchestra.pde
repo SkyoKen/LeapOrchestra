@@ -18,9 +18,8 @@ void setup() {
   //fullScreen();
 
   //OSC
-  //osc=new OSC(new OscP5(this, 8000) , new NetAddress(""192.168.0.6", 4559));
- osc=new OSC(new OscP5(this, 8000) , new NetAddress("192.168.0.4", 4559));
- //osc=new OSC(new OscP5(this, 8000) , new NetAddress("133.14.30.111", 4559));
+ osc=new OSC(new OscP5(this, 8000) , new NetAddress("192.168.0.6", 419));
+// osc=new OSC(new OscP5(this, 8000) , new NetAddress("192.168.0.4", 4559));
  
    //GUI
   gui=new GUI(new ControlP5(this));
