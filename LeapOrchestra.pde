@@ -18,10 +18,10 @@ void setup() {
   //fullScreen();
 
   //OSC
- osc=new OSC(new OscP5(this, 8000) , new NetAddress("192.168.0.6", 419));
-// osc=new OSC(new OscP5(this, 8000) , new NetAddress("192.168.0.4", 4559));
- 
-   //GUI
+  osc=new OSC(new OscP5(this, 8000), new NetAddress("192.168.0.6", 419));
+   //osc=new OSC(new OscP5(this, 8000) , new NetAddress("192.168.0.2", 4559));
+
+  //GUI
   gui=new GUI(new ControlP5(this));
   //LeapMotion
   lp=new LEAP(new LeapMotion(this));
@@ -29,8 +29,6 @@ void setup() {
 void draw() {
   background(0, 50, 0);
   gui.update();
-  
- 
 }
 
 

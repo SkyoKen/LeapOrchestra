@@ -3,7 +3,7 @@ public class LEAP {
   private LeapMotion leap;
   String msg="";                                    //送信メッセージ
   private boolean start=false;
-  PVector old_position=new PVector(0, 0);
+  PVector old_position=new PVector(0, 300, 0);
   private boolean change=false;
   private boolean gesture=false;
   private boolean test=false;
@@ -26,7 +26,7 @@ public class LEAP {
 
   private float zoom=1;
   private float smallestV=1.45;
-  private float deltaV=1;
+  private float deltaV=100;
 
 
 
@@ -36,27 +36,27 @@ public class LEAP {
 
   //処理
   public void update() {
+    //  this.t++;
     HandDraw();
-    //   println(this.leap.getHands().size());
-    //if (this.leap.getHands().size()>1) {
-    for (Hand hand : this.leap.getHands()) {
-      if (hand.isRight()) {
-        this.mFrame=hand.getTimeVisible();
-        print(this.mFrame);
-      }
-    }
 
-    if (this.leap.getHands().size()>0) {
-      if (this.leap.getHands().size()==2) {
-        zoom=CalcuateDistance(this.mFrame);
-      }
-      if (this.leap.getHands().size()==1) {
-        LRUDGestures(this.mFrame, movePos);
-      }
-    }
+
     if (this.gesture) {
       this.t++;
       check();
+    } else {
+      for (Hand hand : this.leap.getHands()) {
+
+        this.mFrame=hand.getTimeVisible();
+        //      println("Frame="+this.mFrame);
+      }
+      if (this.leap.getHands().size()>0) {
+        if (this.leap.getHands().size()==2) {
+          zoom=CalcuateDistance(this.mFrame);
+        }
+        if (this.leap.getHands().size()==1) {
+          LRUDGestures(this.mFrame, movePos);
+        }
+      }
     }
     if (gui.getFlag()&&CheckStop()) {
       gui.getController("PLAY").setValue(0);
@@ -83,7 +83,7 @@ public class LEAP {
       PVector leftPos= new PVector(leftPosition.x, leftPosition.y);
       PVector rightPos= new PVector(rightPosition.x, rightPosition.y);
       distance=10*PVector.dist(leftPos, rightPos);
-      println("distance" + distance);
+      //println("distance" + distance);
     }
     if (distance!=0) {
       return distance;
@@ -92,30 +92,154 @@ public class LEAP {
     return distance=1;
   }
   void LRUDGestures(float mFrame, float movePos) {
-    this.gesture_zoom=false;
     for (Hand hand : this.leap.getHands()) {
       if (hand.getGrabStrength()==1) {
-        println("close");
+        println("waiting...");
+        this.old_position= hand.getPosition();
+
+        this.gesture_zoom=false;
+        this.gesture_left=false;
+        this.gesture_right=false;
+        this.gesture_up=false;
+        this.gesture_down=false;
       } else if (hand.getGrabStrength()==0) {
-        println("open");
+        //println("open");
         PVector v=getV(hand);
         movePos=hand.getPosition().x;
-        if (isMoveLeft(hand, v)) {
+        /*
+        //←↓quickly
+         if (isMoveQuickLeft(hand, v)&&isMoveDown(hand, v)) {
+         if (!this.gesture_left&&!this.gesture_down) {
+         this.gesture_left=true;
+         this.gesture_right=false;
+         this.gesture_up=false;
+         this.gesture_down=true;
+         println("←↓quickly");
+         }
+         } 
+         //←↑quickly
+         else if (isMoveQuickLeft(hand, v)&&isMoveUp(hand, v)) {
+         if (!this.gesture_left&&!this.gesture_up) {
+         this.gesture_left=true;
+         this.gesture_right=true;
+         this.gesture_up=true;
+         this.gesture_down=false;
+         println("←↑quickly");
+         }
+         } 
+         //→↓quickly
+         else if (isMoveQuickRight(hand, v)&&isMoveDown(hand, v)) {
+         if (!this.gesture_right&&!this.gesture_down) {
+         this.gesture_left=false;
+         this.gesture_right=true;
+         this.gesture_up=false;
+         this.gesture_down=true;
+         println("→↓quickly");
+         }
+         } 
+         //→↑quickly
+         else if ((isMoveQuickRight(hand, v)&&isMoveUp(hand, v))) {
+         if (!this.gesture_right&&!this.gesture_up) {
+         this.gesture_left=false;
+         this.gesture_right=true;
+         this.gesture_up=true;
+         this.gesture_down=false;
+         println("→↑quickly");
+         }
+         } 
+         //←↓
+         else */        if (isMoveLeft(hand, v)&&isMoveDown(hand, v)) {
+          if (!this.gesture_left&&!this.gesture_down) {
+            this.gesture_left=true;
+            this.gesture_right=false;
+            this.gesture_up=false;
+            this.gesture_down=true;
+            println("←↓");
+          }
+        }
+        //←↑
+        else if (isMoveLeft(hand, v)&&isMoveUp(hand, v)) {
+          if (!this.gesture_left&&!this.gesture_up) {
+            this.gesture_left=true;
+            this.gesture_right=false;
+            this.gesture_up=true;
+            this.gesture_down=false;
+            println("←↑");
+          }
+        }
+        //→↓
+        else if (isMoveRight(hand, v)&&isMoveDown(hand, v)) {
+          if (!this.gesture_right&&!this.gesture_down) {
+            this.gesture_left=false;
+            this.gesture_right=true;
+            this.gesture_up=false;
+            this.gesture_down=true;
+            println("→↓");
+          }
+        }
+        //→↑
+        else if (isMoveRight(hand, v)&&isMoveUp(hand, v)) {
+          if (!this.gesture_right&&!this.gesture_up) {
+            this.gesture_left=false;
+            this.gesture_right=true;
+            this.gesture_up=true;
+            this.gesture_down=false;
+            println("→↑");
+          }
+        } 
+        //←quickly
+        else if (!this.gesture_left&&isMoveQuickLeft(hand, v)) {
+          println("←quickly");
           this.gesture_left=true;
           this.gesture_right=false;
-          println("move Left");
-        } else if (isMoveRight(hand, v)) {
+          this.gesture_up=false;
+          this.gesture_down=false;
+          osc.sendMessage("MUSICNUM", -1);
+        } 
+        //→quickly
+        else if (!this.gesture_right&&isMoveQuickRight(hand, v)) {
+          println("→quickly");
           this.gesture_left=false;
           this.gesture_right=true;
-          println("move Right");
-        } else if (isMoveUp(hand, v)) {
+          this.gesture_up=false;
+          this.gesture_down=false;
+          osc.sendMessage("MUSICNUM", 1);
+        } 
+        //←
+        else if (!this.gesture_left&&isMoveLeft(hand, v)) {
+          println("←");
+          this.gesture_left=true;
+          this.gesture_right=false;
+          this.gesture_up=false;
+          this.gesture_down=false;
+          osc.sendMessage("TIME", -0.25);
+        } 
+        //→
+        else if (!this.gesture_right&&isMoveRight(hand, v)) {
+          this.gesture_left=false;
+          this.gesture_right=true;
+          this.gesture_up=false;
+          this.gesture_down=false;
+          osc.sendMessage("Time", 0.25);
+          println("→");
+        }
+        //↑
+        else if (!this.gesture_up&&isMoveUp(hand, v)) {
           this.gesture_left=false;
           this.gesture_right=false;
-          println("move Up");
-        } else if (isMoveDown(hand, v)) {
+          this.gesture_up=true;
+          this.gesture_down=false;
+          osc.sendMessage("VOLUME", 1);
+          println("↑");
+        }
+        //↓
+        else if (!this.gesture_down&&isMoveDown(hand, v)) {
           this.gesture_left=false;
           this.gesture_right=false;
-          println("move Down");
+          this.gesture_up=false;
+          this.gesture_down=true;
+          osc.sendMessage("VOLUME", -1);
+          println("↓");
         }
       }
     }
@@ -123,31 +247,39 @@ public class LEAP {
 
   //get hand v
   private PVector getV(Hand hand) {
-   // return new PVector(0, 0, 0);
-    return hand.getPosition();
+    PVector position=hand.getPosition();
+    PVector v   = new PVector(position.x-old_position.x, position.y-old_position.y, position.z-old_position.z);
+    return v;
   }
   //hand move 4 direction
   private boolean isMoveRight(Hand hand, PVector v) {
-    return v.x>deltaV&&!isNoMove(hand,v);
+    return v.x>deltaV&&!isNoMove(hand, v);
   }
   private boolean isMoveLeft(Hand hand, PVector v) {
-    return v.x<-deltaV&&!isNoMove(hand,v);
+    return v.x<-deltaV&&!isNoMove(hand, v);
   }
   private boolean isMoveDown(Hand hand, PVector v) {
-    return v.y>deltaV&&!isNoMove(hand,v);
+    return v.y>0.5*deltaV&&!isNoMove(hand, v);
   }
   private boolean isMoveUp(Hand hand, PVector v) {
-    return v.y<-deltaV&&!isNoMove(hand,v);
+    return v.y<-0.5*deltaV&&!isNoMove(hand, v);
   }
+  private boolean isMoveQuickRight(Hand hand, PVector v) {
+    return v.x>1.5*deltaV&&!isNoMove(hand, v);
+  }
+  private boolean isMoveQuickLeft(Hand hand, PVector v) {
+    return v.x<-1.5*deltaV&&!isNoMove(hand, v);
+  }
+  
 
   //no move
   private boolean isNoMove(Hand hand, PVector v) {
-    println("nomove");
+    //  println("nomove");
     return v.x<smallestV&&v.y<smallestV&&v.z<smallestV;
   }
 
-    //ジャスチャーの検出
-    void check() {
+  //ジャスチャーの検出
+  void check() {
 
     for (Hand hand : this.leap.getHands ()) {
       //ジャスチャーの検出
