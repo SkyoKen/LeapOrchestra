@@ -1,12 +1,10 @@
 
 public class LEAP {
   private LeapMotion leap;
-  String msg="";                                    //送信メッセージ
-  private boolean start=false;
-  PVector old_position=new PVector(0, 300, 0);
+  private String msg="";                                    //送信メッセージ
+  private PVector old_position=new PVector(0, 300, 0);
   private boolean change=false;
   private boolean gesture=false;
-  private boolean test=false;
 
   private int t=0;
 
@@ -15,14 +13,11 @@ public class LEAP {
   private boolean gesture_right=false;
   private boolean gesture_up=false;
   private boolean gesture_down=false;
-  private boolean gesture_zoom=false;
   private float movePos=0;
 
   private float mFrame;
   private PVector leftPosition;
   private PVector rightPosition;
-  private PVector leftRePosition;
-  private PVector rightRePosition;
 
   private float zoom=1;
   private float smallestV=1.45;
@@ -147,8 +142,16 @@ public class LEAP {
          println("→↑quickly");
          }
          } 
+         */
+         if(isBack(hand, v)){
+        //   println("123");
+           this.gesture_left=false;
+            this.gesture_right=false;
+            this.gesture_up=false;
+            this.gesture_down=false;
+         }
          //←↓
-         else */        if (isMoveLeft(hand, v)&&isMoveDown(hand, v)) {
+         else if (isMoveLeft(hand, v)&&isMoveDown(hand, v)) {
           if (!this.gesture_left&&!this.gesture_down) {
             this.gesture_left=true;
             this.gesture_right=false;
@@ -270,11 +273,14 @@ public class LEAP {
   private boolean isMoveQuickLeft(Hand hand, PVector v) {
     return v.x<-1.5*deltaV&&!isNoMove(hand, v);
   }
+  private boolean isBack(Hand hand, PVector v) {
+    return v.x<0.5*deltaV&&v.x>-0.5*deltaV&&v.y<0.25*deltaV&&v.y>-0.25*deltaV;
+  }
   
 
   //no move
   private boolean isNoMove(Hand hand, PVector v) {
-    //  println("nomove");
+ //     println("nomove");
     return v.x<smallestV&&v.y<smallestV&&v.z<smallestV;
   }
 
