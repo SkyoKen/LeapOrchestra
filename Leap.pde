@@ -36,11 +36,11 @@ public class LEAP {
     if (this.gesture) {
       this.t++;
       check();
-    } else if(!this.gesture&&gui.getController("bar").getValue()==1){
+    } else if (!this.gesture&&gui.getController("bar").getValue()==1) {
       for (Hand hand : this.leap.getHands()) {
 
         this.mFrame=hand.getTimeVisible();
-        //      println("Frame="+this.mFrame);
+        //println("Frame="+this.mFrame);
       }
       if (this.leap.getHands().size()>0) {
         if (this.leap.getHands().size()==2) {
@@ -59,7 +59,6 @@ public class LEAP {
   }
 
   private float CalcuateDistance(float mFrame) {
- //   gesture_zoom=true;
     gesture_left=false;
     gesture_right=false;
 
@@ -90,7 +89,6 @@ public class LEAP {
         println("waiting...");
         this.old_position= hand.getPosition();
 
-     //   this.gesture_zoom=false;
         this.gesture_left=false;
         this.gesture_right=false;
         this.gesture_up=false;
@@ -141,15 +139,14 @@ public class LEAP {
          }
          } 
          */
-         if(isBack(hand, v)){
-        //   println("123");
-           this.gesture_left=false;
-            this.gesture_right=false;
-            this.gesture_up=false;
-            this.gesture_down=false;
-         }
-         //←↓
-         else if (isMoveLeft(hand, v)&&isMoveDown(hand, v)) {
+        if (isBack(hand, v)) {
+          this.gesture_left=false;
+          this.gesture_right=false;
+          this.gesture_up=false;
+          this.gesture_down=false;
+        }
+        //←↓
+        else if (isMoveLeft(hand, v)&&isMoveDown(hand, v)) {
           if (!this.gesture_left&&!this.gesture_down) {
             this.gesture_left=true;
             this.gesture_right=false;
@@ -274,11 +271,11 @@ public class LEAP {
   private boolean isBack(Hand hand, PVector v) {
     return v.x<0.5*deltaV&&v.x>-0.5*deltaV&&v.y<0.25*deltaV&&v.y>-0.25*deltaV;
   }
-  
+
 
   //no move
   private boolean isNoMove(Hand hand, PVector v) {
- //     println("nomove");
+    //     println("nomove");
     return v.x<smallestV&&v.y<smallestV&&v.z<smallestV;
   }
 
@@ -287,7 +284,7 @@ public class LEAP {
 
     for (Hand hand : this.leap.getHands ()) {
       //ジャスチャーの検出
-      if (this.t/60==1) {
+      if (this.t/60==3) {
         this.t=0;
 
         String finger="";

@@ -1,9 +1,9 @@
-//OSC
-import oscP5.*;                   // Please install OscP5 and ControlP5 libraries from
-import netP5.*;                   // the menu Sketch / Import Library / Add Library..
+//OSC通信
+import oscP5.*;                   
+import netP5.*;                   
 OSC osc;
 
-//ControlP5
+//GUI
 import controlP5.*;
 ControlP5 cp5;
 GUI gui;
@@ -18,9 +18,7 @@ void setup() {
   //fullScreen();
 
   //OSC
-//  osc=new OSC(new OscP5(this, 8000) , new NetAddress("192.168.0.3", 4559));
-  osc=new OSC(new OscP5(this, 8000) , new NetAddress("192.168.0.12", 4559));
-
+  osc=new OSC(new OscP5(this, 8000) , new NetAddress("192.168.0.255", 4559));
   //GUI
   gui=new GUI(new ControlP5(this));
   //LeapMotion
@@ -31,7 +29,7 @@ void draw() {
   gui.update();
 }
 
-
+//メッセージの表示
 void writeMsg(String s) {
   //year/month/day hour:minute:second
   String time=String.format("%d/%02d/%02d %02d:%02d:%02d\t", year(), month(), day(), hour(), minute(), second());

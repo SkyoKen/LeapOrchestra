@@ -5,6 +5,7 @@ public class OSC {
     this.oscP5=oscP5;
     this.sonicPi=sonicPi;
   }
+  //送信
   public void sendMessage(String... s) {
     OscMessage msg = new OscMessage(s[0]);
     for (String str : s) {
@@ -15,12 +16,14 @@ public class OSC {
     this.oscP5.send(msg, sonicPi);
     writeMsg("/osc/"+s[0]+" "+s[1]);
   }
+  //送信
   public void sendMessage(String s, float i) {
     OscMessage msg = new OscMessage(s);
     msg.add(i);
     this.oscP5.send(msg, sonicPi);
     writeMsg("/osc/"+s+" "+i);
   }
+  //IPアドレスとポートの取得
   public String getAddressPort(){
     return String.format("IP: %-16s PORT: %s",sonicPi.address(),sonicPi.port());
   }

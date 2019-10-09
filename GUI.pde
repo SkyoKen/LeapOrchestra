@@ -29,9 +29,9 @@ public class GUI {
       ;
     this.console=this.cp5.addConsole(messageBox);
 
-this.cp5.addTextarea("IPPORT")
-      .setPosition(50,height-24*1.5)
-      .setSize(width,24)
+    this.cp5.addTextarea("IPPORT")
+      .setPosition(50, height-24*1.5)
+      .setSize(width, 24)
       .setFont(fontMsg)
       .setLineHeight(20)
       .setText(osc.getAddressPort())
@@ -110,7 +110,6 @@ this.cp5.addTextarea("IPPORT")
     if (!lp.isExist())return;
     PVector pos=lp.getPos();
     this.cp5.getPointer().set((int)pos.x, (int)pos.y);
-    // background(0, 50, 0);
 
     pushMatrix();
     translate(this.cp5.getPointer().getX(), this.cp5.getPointer().getY());
@@ -200,6 +199,7 @@ public void bar(int n) {
     break;
   case 2:
     lp.setGesture(true);
+    gui.hide();
     writeMsg("GESTURE");
   default:
     break;
