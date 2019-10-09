@@ -11,5 +11,6 @@
 ### Processing
 * [Processingのダウンロード](https://processing.org/download/)
 * Leap Motion for Processingライブラリのインポート
-* [UDPライブラリのインポート](https://memorandums.hatenablog.com/entry/2016/11/08/203610)(2019.06.21追加)
+* controlP5ライブラリのインポート
+* OSCライブラリのインポート  
 [↑TOP](#目次)
