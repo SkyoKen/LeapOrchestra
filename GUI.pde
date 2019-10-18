@@ -1,3 +1,4 @@
+//*
 public class GUI {
   private ControlP5 cp5;
   private Toggle PLAY;
@@ -27,7 +28,7 @@ public class GUI {
       .setColorBackground(color(0, 102, 0, 160))
       .setColorForeground(color(255, 100))
       ;
-    this.console=this.cp5.addConsole(messageBox);
+    this.console=this.cp5.addConsole(this.messageBox);
 
     this.cp5.addTextarea("IPPORT")
       .setPosition(50, height-24*1.5)
@@ -102,9 +103,19 @@ public class GUI {
     this.chart.setData("incoming", new float[100]);
   }
   public void update() {
+    this.console=this.cp5.addConsole(this.messageBox);
+
     pointer();
     if (this.PLAY.getValue()==1)chart.push("incoming", (sin(frameCount*0.1)*5));
     else chart.push("incoming", random(-0.1, 0.1));
+
+    if (gui.getController("bar").getValue()==2) {
+      textFont(createFont("consolas", 255));
+      textSize(255);
+      textAlign(CENTER);
+      fill(255);
+      text(2-lp.t/60, width/2, height/2);
+    }
   }
   void pointer() {
     if (!lp.isExist())return;
@@ -130,7 +141,7 @@ public class GUI {
   public Println getConsole() {
     return this.console;
   }
-  public Controller getController(String name) {
+  public controlP5.Controller getController(String name) {
     return  this.cp5.getController(name);
   }
   public void show() {
@@ -144,7 +155,6 @@ public class GUI {
         this.cp5.getController(msg[y]+(x==0?"-":"+")).show();
       }
     }
-    writeMsg("BUTTON");
   }
   public void hide() {
     this.cp5.getController("PLAY").hide();
@@ -157,7 +167,6 @@ public class GUI {
         this.cp5.getController(msg[y]+(x==0?"-":"+")).hide();
       }
     }
-    writeMsg("WAVE");
   }
   public boolean getFlag() {
     return gui.getController("PLAY").getValue()==1;
@@ -193,15 +202,21 @@ public void bar(int n) {
   switch(n) {
   case 0:
     gui.show();
+    writeMsg("Button");
+    lp.setGesture(false);
     break;
   case 1:
     gui.hide();
+    writeMsg("WAVE");
+    lp.setGesture(false);
     break;
   case 2:
-    lp.setGesture(true);
     gui.hide();
+    lp.setGesture(true);
     writeMsg("GESTURE");
+
   default:
     break;
   }
 }
+//*/
