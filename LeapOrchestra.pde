@@ -16,11 +16,13 @@ Leap lp;
 
 void setup() {
   size(960, 540);
+frameRate(60);
   //OSC
-  osc=new OSC(new OscP5(this, 8000) , new NetAddress("192.168.0.255", 4559));
+  osc=new OSC(new OscP5(this, 8000) , new NetAddress("169.254.255.255", 4559));
   //GUI
   gui=new GUI(new ControlP5(this));
   //LeapMotion
+  //  comleap=new ComLeap();
   lp=new Leap(new LeapMotion(this));
 }
 

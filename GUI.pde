@@ -81,12 +81,12 @@ public class GUI {
       .setFont(font)
       .align(CENTER, CENTER, CENTER, CENTER);
     //ButtonBar
-    this.cp5.addButtonBar("bar")
+          this.cp5.addButtonBar("bar")
       .setPosition(0, 0)
       .setFont(fontMsg)
       .setSize(width, 30)
 
-      .addItems(split("BUTTON WAVE GESTURE", " "))
+      .addItems(split("BUTTON 2 3 4", " "))
       ;
 
     this.chart = this.cp5.addChart("dataflow")
@@ -109,13 +109,6 @@ public class GUI {
     if (this.PLAY.getValue()==1)chart.push("incoming", (sin(frameCount*0.1)*5));
     else chart.push("incoming", random(-0.1, 0.1));
 
-    if (gui.getController("bar").getValue()==2) {
-      textFont(createFont("consolas", 255));
-      textSize(255);
-      textAlign(CENTER);
-      fill(255);
-      text(2-lp.t/60, width/2, height/2);
-    }
   }
   void pointer() {
     if (!lp.isExist())return;
@@ -203,18 +196,24 @@ public void bar(int n) {
   case 0:
     gui.show();
     writeMsg("Button");
-    lp.setGesture(false);
     break;
   case 1:
     gui.hide();
-    writeMsg("WAVE");
-    lp.setGesture(false);
+    writeMsg("TEMPO2");
+    lp.changeTempo(2);
     break;
   case 2:
-    gui.hide();
-    lp.setGesture(true);
-    writeMsg("GESTURE");
-
+  gui.hide();
+    writeMsg("TEMPO3");
+   lp.changeTempo(3);
+  break;
+  
+  case 3:
+  gui.hide();
+    writeMsg("TEMPO4");
+lp.changeTempo(4);
+  break;
+  
   default:
     break;
   }

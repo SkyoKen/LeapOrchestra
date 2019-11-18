@@ -1,16 +1,40 @@
+enum Vector {
+  LU, UP, RU, 
+    LEFT, CENTER, RIGHT, 
+    LD, DOWN, RD
+}
 
 public class Leap {
+
   private LeapMotion leap;
 
   private boolean change=false;
-  private boolean gesture=false;
+  //  private boolean gesture=false;
 
-  private int t=0;
-
+  //private int t=0;
+  //private Vector vector=Vector.CENTER;
+ // private ArrayList<Vector> vec=new ArrayList<Vector>(); 
+  private Tempo vec=new Tempo();
   private com.leapmotion.leap.Controller controller = new com.leapmotion.leap.Controller();
-  private boolean gesturezoom=false;
-  private float smallestV=500*3;
+  //private boolean gesturezoom=false;
+  private float smallestV=250;
 
+  private Tempo[][] tempo={{}, {}, 
+    //Tempo2
+    {new Tempo(new Vector[]{Vector.DOWN, Vector.RIGHT, Vector.UP}), 
+      new Tempo(new Vector[]{Vector.DOWN, Vector.LEFT, Vector.UP})}, 
+    //Tempo3
+    {new Tempo(new Vector[]{Vector.DOWN}), 
+      new Tempo(new Vector[]{Vector.UP, Vector.RIGHT, Vector.DOWN, Vector.RIGHT, Vector.UP}), 
+      new Tempo(new Vector[]{ Vector.DOWN, Vector.LEFT, Vector.UP}), 
+    }, 
+    //Tempo4
+    {new Tempo(new Vector[]{Vector.DOWN}), 
+      new Tempo(new Vector[]{Vector.UP, Vector.LEFT, Vector.DOWN}), 
+      new Tempo(new Vector[]{Vector.UP, Vector.RIGHT, Vector.DOWN, Vector.RIGHT, Vector.UP}), 
+      new Tempo(new Vector[]{ Vector.DOWN, Vector.LEFT, Vector.UP})}
+  };
+  public TempoList tempolist=new TempoList(tempo[2]);
 
   public Leap(LeapMotion leap) {
     this.leap=leap;
@@ -18,14 +42,11 @@ public class Leap {
 
   //処理
   public void update() {
-    
     HandDraw();
-    if (this.gesture) {
-      this.t++;
-     check();
-       
-    } else if (!this.gesture&&gui.getController("bar").getValue()==1) {
-      wsad();
+    if (gui.getController("bar").getValue()!=0) {
+      if (think()) {
+        move();
+      }
     }
     if (gui.getFlag()&&CheckStop()) {
       gui.getController("PLAY").setValue(0);
@@ -33,126 +54,57 @@ public class Leap {
       gui.getController("PLAY").setValue(1);
     }
   }
-  private void wsad() {
-    String msg="";
+
+  private boolean think() {
+
     for (com.leapmotion.leap.Hand hand : this.controller.frame().hands()) {
       PVector v=new PVector(hand.palmVelocity().getX(), hand.palmVelocity().getY(), hand.palmVelocity().getZ());
+      
+    //  println(v);
       if (isNoMove(v)) {
-        this.gesturezoom=false;
+        this.vec.clear();
+        return false;
       }
-      if (!gesturezoom) {
-        //vector
-        if (v.x>500*3.5) {
-          msg="→";
-          osc.sendMessage("MUSICNUM", 1);
-          this.gesturezoom=true;
-        } else if (v.x<-500*3.5) {
-          msg="←";
-          osc.sendMessage("MUSICNUM", -1);
-          this.gesturezoom=true;
-        } else if (v.x>500*3) {
-          msg="→";
-          osc.sendMessage("TIME", 0.25);
-          this.gesturezoom=true;
-        } else if (v.x<-500*3) {
-          msg="←";
-          osc.sendMessage("TIME", -0.25);
-          this.gesturezoom=true;
-        } else if (v.y>500*3) {
-          msg="↑";
-          osc.sendMessage("VOLUME", 1);
-          this.gesturezoom=true;
-        } else if (v.y<-500*3) {
-          msg="↓";
-          osc.sendMessage("VOLUME", -1);
-          this.gesturezoom=true;
-        } else {
-          msg="";
-          this.gesturezoom=false;
+      float speed=(hand.palmVelocity().getX()+ hand.palmVelocity().getY()+ hand.palmVelocity().getZ())%3;
+      if (v.x<-500) {
+        this.vec.add(Vector.LEFT,speed);
+      } else if (v.x>500) {
+        this.vec.add(Vector.RIGHT,speed);
+      } else if (v.y>500/2) {
+        this.vec.add(Vector.UP,speed);
+      } else if (v.y<-500/2) {
+        this.vec.add(Vector.DOWN,speed);
+      }
+     // println(speed);
+      return this.vec.size()>0;
+    } 
+    return false;
+  }
+  private void move() {
+    checkVector();
+  }
+  private void checkVector() {
+    Tempo temp=new Tempo();
+    if (this.vec.size()>0) {
+      temp.add(this.vec.getVector(0),this.vec.getSpeed(0));
+      for(int i=0;i<this.vec.size();i++){
+       Vector v=this.vec.getVector(i);
+        if (!temp.getVector(temp.size()-1).equals(v)) {
+          temp.add(v);
         }
       }
+      //print
+      println(temp.toString());
     }
-    text( msg, 50, 150);
+    //check
+    tempolist.check(temp);
+  }
+  public void changeTempo(int n) {
+    this.tempolist=new TempoList(this.tempo[n]);
   }
   //no move
   private boolean isNoMove(PVector v) {
-    return abs(v.x)<smallestV&&abs(v.y)<smallestV&&abs(v.z)<smallestV;
-  }
-  //ジャスチャーの検出
-  void check() {
-
-    for (de.voidplus.leapmotion.Hand hand : this.leap.getHands ()) {
-      //ジャスチャーの検出
-     if (this.t/60>2) {
-        this.t=0;
-        fill(255);
-        //   text(this.t,width/2,height/2);
-        String finger="";
-        String msg="";   
-        String s="";
-        int n=0;
-
-        for (de.voidplus.leapmotion.Finger f : hand.getFingers())finger+=f.isExtended()?1:0;
-        switch(finger) {
-        case "00000":
-          msg="0\nrock";
-          s="MUSICNUM";
-          n=-1;
-
-          break;
-        case "01000":
-          s="MUSICNUM";
-          n=1;
-          msg="1";
-          break;
-
-        case "01100":
-          s="VOLUME";
-          n=-1;
-          msg="2\nscissors";
-          break;
-
-        case "00111":
-          s="VOLUME";
-          n=1;
-          msg="3";
-          break;
-
-        case "01111":
-          s="SCALE";
-          n=-1;
-
-          msg="4";
-          break;
-
-        case "11111":
-          s="SCALE";
-          n=1;
-
-          msg="5\npaper";
-          break;
-
-        case "10001":
-          s="TIME";
-          n=-1;
-
-
-          msg="6";
-          break;
-
-        case "11000":
-          s="TIME";
-          n=1;
-          msg="7";
-          break;
-
-        default:
-          msg="?";
-          return;
-        }
-        osc.sendMessage(s, n);
-      }
-    }
+    return abs(v.x*5)<smallestV&&abs(v.y*5)<smallestV&&abs(v.z*5)<smallestV;
   }
   private void HandDraw() {
     for (de.voidplus.leapmotion.Hand hand : this.leap.getHands ()) {
@@ -214,10 +166,9 @@ public class Leap {
   public void setChange(boolean change) {
     this.change=change;
   }
-  public void setGesture(boolean gesture) {
-    this.gesture=gesture;
-  }
-  
+  /*public void setGesture(boolean gesture) {
+   this.gesture=gesture;
+   }*/
 }
 
 public  void leapOnInit() {
