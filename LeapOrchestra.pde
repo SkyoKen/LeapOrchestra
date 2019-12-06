@@ -1,7 +1,3 @@
-//OSC通信
-import oscP5.*;                   
-import netP5.*;                   
-OSC osc;
 
 //GUI
 import controlP5.*;
@@ -13,25 +9,20 @@ import de.voidplus.leapmotion.*;
 import com.leapmotion.leap.*;
 Leap lp;
 
+boolean start=false;
 
 void setup() {
   size(960, 540);
-frameRate(30);
-  //OSC
-  //osc=new OSC(new OscP5(this, 8000) , new NetAddress("169.254.255.255", 4559));
-  osc=new OSC(new OscP5(this, 8000) , new NetAddress("169.254.207.157", 4559));
+  frameRate(30);
   //GUI
   gui=new GUI(new ControlP5(this));
   //LeapMotion
-  //  comleap=new ComLeap();
   lp=new Leap(new LeapMotion(this));
 }
 
 void draw() {
   background(0, 50, 0);
   gui.update();
-
-  
 }
 //メッセージの表示
 void writeMsg(String s) {
