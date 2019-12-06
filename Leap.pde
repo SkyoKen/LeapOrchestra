@@ -34,6 +34,8 @@ class Leap {
   //初期化
   Leap(LeapMotion leap) {
     this.leap=leap;
+    gui.getConsole().clear();
+  
   }
 
   //処理

@@ -81,6 +81,7 @@ class Gesture {
     return true;
   }
 }
+
 class GestureList {
 
   int num;

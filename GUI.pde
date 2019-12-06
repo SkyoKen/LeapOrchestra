@@ -1,6 +1,5 @@
 class GUI {
   ControlP5 cp5;
-  Toggle PLAY;
   Textarea messageBox;
   Println console;
   Chart chart;
@@ -13,19 +12,17 @@ class GUI {
     PFont font = createFont("consolas", 32);
     PFont fontMsg=createFont("consolas", 20);
 
-    this.cp5.setColorBackground(color(0, 102, 0, 160));
+   this.cp5.setColorBackground(color(0, 102, 0, 160));
     this.cp5.setColorForeground(color(107, 142, 35));
     this.cp5.setColorActive(color(100, 255, 35, 180));
-
     //MessageBox
     this.messageBox=this.cp5.addTextarea("Message")
       .setPosition(50, height/2+50)
       .setSize(width-50-250, height/2-100)
       .setFont(fontMsg)
       .setLineHeight(20)
-      .setColor(color(222))
+     .setColor(color(222))
       .setColorBackground(color(0, 102, 0, 160))
-      .setColorForeground(color(255, 100))
       ;
     this.console=this.cp5.addConsole(this.messageBox);
 
@@ -50,7 +47,6 @@ class GUI {
       .setRange(-20, 20)
       .setView(Chart.LINE) // use Chart.LINE, Chart.PIE, Chart.AREA, Chart.BAR_CENTERED
       .setStrokeWeight(1.5)
-      .setColorCaptionLabel(color(40))
       ;
 
     this.chart.addDataSet("incoming");
@@ -104,7 +100,4 @@ void bar(int n) {
   default:
     break;
   }
-}
-void writeMsg(String... s) {
-  println(s);
 }
